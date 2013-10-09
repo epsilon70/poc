@@ -11,6 +11,7 @@
     <modules>
         <module>poc-gui</module>
         <module>poc-pojo</module>
+        <module>emulator</module>
     </modules>
 
     <dependencies>
