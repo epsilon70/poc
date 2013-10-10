@@ -26,7 +26,7 @@ public class Emulator {
         return true;
     }
 
-    public static byte calculateChecksum(byte[] instruction){
+    private static byte calculateChecksum(byte[] instruction){
         byte checksum = instruction[1];
         for(int i = 2; i<instruction.length-2; i ++){
             checksum = (byte) (checksum ^ instruction[i]);
@@ -34,7 +34,7 @@ public class Emulator {
         return checksum;
     }
 
-    private static enum BOARD {
+    public static enum BOARD {
         BOARD_ONE((byte) 0x01),
         BOARD_TWO((byte) 0x02),
         BOARD_THREE((byte) 0x03),
@@ -45,29 +45,37 @@ public class Emulator {
         BOARD(byte index) {
             this.index = index;
         }
+
+        public byte getIndex(){
+            return index;
+        }
     }
 
-    private static enum COMMAND {
+    public static enum COMMAND {
         START((byte) 0xFF),
-        stop((byte) 0x0F),
-        reading_data((byte) 0xF0),
-        received_data((byte) 0x00),
-        received_data_and_reading_next_one((byte) 0xAA),
-        heating((byte) 0xC0),
-        cooling((byte) 0xC2),
-        reading_detector_temperature((byte) 0xC5),
-        heading_end((byte) 0xC6),
-        reading_temperature((byte) 0xC8),
-        set_voltage((byte) 0xD0),
-        reading_voltage((byte) 0xD8),
-        up_voltage((byte) 0xDA),
-        down_voltage((byte) 0xDB),
-        reset_voltage((byte) 0xDC);
+        STOP((byte) 0x0F),
+        READING_DATA((byte) 0xF0),
+        RECEIVED_DATA((byte) 0x00),
+        RECEIVED_DATA_AND_READING_NEXT_ONE((byte) 0xAA),
+        HEATING((byte) 0xC0),
+        COOLING((byte) 0xC2),
+        READING_DETECTOR_TEMPERATURE((byte) 0xC5),
+        HEADING_END((byte) 0xC6),
+        READING_TEMPERATURE((byte) 0xC8),
+        SET_VOLTAGE((byte) 0xD0),
+        READING_VOLTAGE((byte) 0xD8),
+        UP_VOLTAGE((byte) 0xDA),
+        DOWN_VOLTAGE((byte) 0xDB),
+        RESET_VOLTAGE((byte) 0xDC);
 
         private final byte command;
 
         COMMAND(byte value) {
             this.command = value;
+        }
+
+        public byte getCommand(){
+            return this.command;
         }
     }
 }
